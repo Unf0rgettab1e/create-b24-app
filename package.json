@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter create-b24-app build",
+    "dev": "pnpm --filter create-b24-app dev"
+  }
+}

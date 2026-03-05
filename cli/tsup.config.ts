@@ -1,0 +1,12 @@
+import { defineConfig } from 'tsup'
+
+export default defineConfig({
+  entry: ['src/main.ts'],
+  format: ['esm'],
+  clean: true,
+  banner: {
+    js: '#!/usr/bin/env node',
+  },
+  noExternal: ['@clack/prompts'],
+  external: ['@nuxt/cli'],
+})
