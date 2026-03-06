@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsx ./src/main.ts"
+    "dev": "tsx ./src/main.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@clack/prompts": "^0.9.1",
