@@ -3,17 +3,16 @@ import type {
   PlatformType,
   StarterName,
   TemplateId,
-  TemplateMapping,
 } from './types'
 
-const TEMPLATE_MAP: TemplateMapping[] = [
-  { templateId: 'desktop-local', starter: 'starter' },
-  { templateId: 'desktop-market', starter: 'dashboard' },
-  { templateId: 'mobile-local', starter: 'starter' },
-  { templateId: 'mobile-market', starter: 'dashboard' },
-  { templateId: 'universal-local', starter: 'starter' },
-  { templateId: 'universal-market', starter: 'dashboard' },
-]
+const TEMPLATE_MAP: Record<TemplateId, StarterName> = {
+  'desktop-local': 'starter',
+  'desktop-market': 'dashboard',
+  'mobile-local': 'starter',
+  'mobile-market': 'dashboard',
+  'universal-local': 'starter',
+  'universal-market': 'dashboard',
+}
 
 export function buildTemplateId(
   platform: PlatformType,
@@ -28,10 +27,10 @@ export function resolveTemplate(
 ): StarterName {
   const templateId = buildTemplateId(platform, distribution)
 
-  const entry = TEMPLATE_MAP.find((m) => m.templateId === templateId)
-  if (!entry) {
+  const starter = TEMPLATE_MAP[templateId]
+  if (!starter) {
     throw new Error(`Unknown template identifier: ${templateId}`)
   }
 
-  return entry.starter
+  return starter
 }

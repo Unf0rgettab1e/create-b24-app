@@ -23,8 +23,3 @@ export interface UserAnswers {
   distribution: DistributionType
   platform: PlatformType
 }
-
-export interface TemplateMapping {
-  templateId: TemplateId
-  starter: StarterName
-}

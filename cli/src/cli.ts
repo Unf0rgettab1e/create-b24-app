@@ -4,7 +4,6 @@ import * as prompts from '@clack/prompts'
 import type { CLIOptions } from './types'
 import { askQuestions } from './questions'
 import { resolveTemplate, buildTemplateId } from './resolveTemplate'
-import { printNextSteps } from './printNextSteps'
 
 export function createCLI(opts: CLIOptions) {
   const main = defineCommand({
@@ -22,9 +21,7 @@ export function createCLI(opts: CLIOptions) {
     async setup(context) {
       prompts.intro(opts.name)
 
-      const dirFromArg = context.args.dir
-        ? String(context.args.dir)
-        : undefined
+      const dirFromArg = context.args.dir ? String(context.args.dir) : undefined
 
       const answers = await askQuestions(dirFromArg)
       const dir = resolve(answers.projectName)
@@ -35,14 +32,7 @@ export function createCLI(opts: CLIOptions) {
       prompts.log.step('Downloading template...')
 
       const { runCommand } = await import('@nuxt/cli')
-      await runCommand('init', [
-        dir,
-        '-t',
-        `gh:${opts.repo}/.starters/${starter}`,
-      ])
-
-      printNextSteps(answers.projectName)
-
+      await runCommand('init', [dir, '-t', `gh:${opts.repo}/.starters/${starter}`])
       prompts.outro('Done.')
     },
   })
